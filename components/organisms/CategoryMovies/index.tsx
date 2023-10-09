@@ -16,7 +16,7 @@ export default function CategoryMovies() {
     setCategories(genres);
   }, []);
 
-  const getCategoryMoviesAPI = useCallback(async (idc) => {
+  const getCategoryMoviesAPI = useCallback(async (idc: number) => {
     const response: any = await getCategoryMovies(idc);
     setMovies(response.results);
   }, []);
@@ -33,7 +33,7 @@ export default function CategoryMovies() {
     <div className="section-category container-xxxl mt-0 mt-lg-5">
       <div className="mb-3 d-flex justify-content-between align-items-center">
         <h3 className="fw-bold">Browse by category</h3>
-        <Link href={`/movies/category?idc=${id}&cat=${active}&page=1`}>
+        <Link href={`/movies/category?idc=${id}&cat=${active}&page=1`} legacyBehavior>
           <a className="view-all">View All</a>
         </Link>
       </div>

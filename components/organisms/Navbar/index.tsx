@@ -7,7 +7,7 @@ export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container container-xxxl">
-        <Link href="/">
+        <Link href="/" legacyBehavior>
           <a className="navbar-brand fs-3">
             <span className="text-purple fw-bold">What</span>
             Movie
@@ -20,12 +20,12 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 pt-1">
             <li className="nav-item">
-              <Link href="/">
+              <Link href="/" legacyBehavior>
                 <a className="nav-link">Home</a>
               </Link>
             </li>
             <li className="nav-item">
-              <Link href="/about-us">
+              <Link href="/about-us" legacyBehavior>
                 <a className="nav-link">About Us</a>
               </Link>
             </li>

@@ -28,7 +28,7 @@ export default function MovieItem(props: Partial<MovieItemProps>) {
   if (type === 'backdrop') {
     return (
       <div className="movie-item">
-        <Link href={`/movie/${id}`}>
+        <Link href={`/movie/${id}`} legacyBehavior>
           <a>
             <div className="movie-poster mb-3">
               <img src={`${rootImg}/w500${backdrop}`} alt={`backdrop ${title}`} />
@@ -51,7 +51,7 @@ export default function MovieItem(props: Partial<MovieItemProps>) {
 
   return (
     <div className="col movie-item">
-      <Link href={`/movie/${id}`}>
+      <Link href={`/movie/${id}`} legacyBehavior>
         <a className="d-flex flex-column">
           <div className="movie-poster mb-3">
             <img src={`${rootImg}/w185${poster}`} alt={`poster ${title}`} />

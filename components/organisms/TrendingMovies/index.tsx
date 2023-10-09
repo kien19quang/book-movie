@@ -8,7 +8,7 @@ export default function TrendingMovies() {
   const [active, setActive] = useState('week');
   const [movies, setMovies] = useState([]);
 
-  const getTrendingMoviesAPI = useCallback(async (param) => {
+  const getTrendingMoviesAPI = useCallback(async (param: string) => {
     const response: any = await getTrendingMovies(param);
     setMovies(response.results);
   }, []);
@@ -40,7 +40,7 @@ export default function TrendingMovies() {
           </div>
         </div>
         <div>
-          <Link href={`/movies/trending?q=${active}&page=1`}>
+          <Link href={`/movies/trending?q=${active}&page=1`} legacyBehavior>
             <a className="view-all">
               View All
             </a>

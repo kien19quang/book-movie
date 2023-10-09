@@ -8,7 +8,7 @@ export default function Movies() {
   const [query, setQuery] = useState('popular');
   const [movies, setMovies] = useState([]);
 
-  const getMoviesAPI = useCallback(async (param) => {
+  const getMoviesAPI = useCallback(async (param: string) => {
     const response: any = await getMovies(param);
     setMovies(response.results);
   }, []);
@@ -33,7 +33,7 @@ export default function Movies() {
           </select>
         </div>
         <div className="align-self-end">
-          <Link href={`/movies/based?q=${query}&page=1`}>
+          <Link href={`/movies/based?q=${query}&page=1`} legacyBehavior>
             <a className="view-all">
               View All
             </a>

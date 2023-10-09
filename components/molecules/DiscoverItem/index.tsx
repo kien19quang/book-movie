@@ -19,7 +19,7 @@ export default function DiscoverItem(props: DiscoverItemProps) {
     genres: [],
   });
 
-  const getDiscoverMovieAPI = useCallback(async (idm) => {
+  const getDiscoverMovieAPI = useCallback(async (idm: number) => {
     const response: any = await getDetailMovie(idm);
     setData(response);
   }, []);
@@ -36,7 +36,7 @@ export default function DiscoverItem(props: DiscoverItemProps) {
     <div />
   ) : (
     <div className="movie-item">
-      <Link href={`/movie/${id}`}>
+      <Link href={`/movie/${id}`} legacyBehavior>
         <a>
           <div className="movie-poster mb-3">
             <img src={`${rootImg}/w500/${data.backdrop_path}`} alt={`backdrop ${data.title}`} />
