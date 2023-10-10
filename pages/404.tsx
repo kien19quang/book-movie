@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import img from 'next/image';
 import Link from 'next/link';
 import ButtonTheme from '../components/organisms/Navbar/ButtonTheme';
 
@@ -6,7 +6,7 @@ export default function PageNotFound() {
   return (
     <div className="not-found">
       <div className="text-center">
-        <Image src="/image/404-not-found.svg" width={500} height={250} alt='Not Found' />
+        <img style={{ width: '100%', height: '100%' }} src="/image/404-not-found.svg" width={500} height={250} alt='Not Found' />
         <h1 className="my-3">Page Not Found</h1>
         <Link href="/" legacyBehavior>
           <a className="btn btn-outline-purple">
