@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getMovies } from '@/services/data_api';
-import MovieItem from '@/components/Molecules/MovieItem';
+import MovieItem from '@/components/Molecules/MovieItem/MovieItem';
 import { DetailMovieTypes } from '@/services/data_types';
 
 export default function Movies() {
