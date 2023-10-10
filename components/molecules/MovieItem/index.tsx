@@ -14,7 +14,7 @@ interface MovieItemProps {
   type: 'poster' | 'backdrop';
 }
 
-export default function MovieItem(props: Partial<MovieItemProps>) {
+const MovieItem = (props: Partial<MovieItemProps>) => {
   const {
     id, poster, backdrop, title, rate, count, release_date, genres = [], type,
   } = props;
@@ -78,3 +78,6 @@ export default function MovieItem(props: Partial<MovieItemProps>) {
     </div>
   );
 }
+
+
+export default MovieItem
