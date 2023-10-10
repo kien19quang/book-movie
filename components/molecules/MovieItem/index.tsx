@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import img from 'next/image';
-import { CategoryTypes } from '@/services/data_types';
+import { CategoryTypes } from '../../../services/data_types';
+
 
 interface MovieItemProps {
   id: number;

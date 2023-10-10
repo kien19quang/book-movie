@@ -1,6 +1,6 @@
-import ApiClient from "@/configs/axiosConfig";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getSession } from "next-auth/react";
+import ApiClient from "../../configs/axiosConfig";
 
 export const fetchListPage = createAsyncThunk(
   'fetchListPage', 

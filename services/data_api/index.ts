@@ -1,5 +1,4 @@
-import ApiClient from '@/configs/axiosConfig';
-import axios from 'axios';
+import ApiClient from '../../configs/axiosConfig';
 
 
 const keyAPI = process.env.NEXT_PUBLIC_KEY;

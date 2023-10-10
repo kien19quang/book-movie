@@ -1,7 +1,7 @@
 import { NextSeoProps } from "next-seo";
 import SEO from "./SEO";
 import Head from 'next/head'
-import { seoDefault } from "@/configs/ConfigSeo";
+import { seoDefault } from "../../../configs/ConfigSeo";
 
 
 const NextHead = (props: NextSeoProps) => {

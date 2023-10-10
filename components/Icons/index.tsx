@@ -1,4 +1,5 @@
-import { IconProps } from "@/types/common";
+import { IconProps } from "../../types/common";
+
 
 const Logo = ({ className = '', width = 114, height = 20 }: IconProps) => {
   return (

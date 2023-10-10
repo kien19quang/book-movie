@@ -1,5 +1,6 @@
-import { DetailMovieTypes } from '@/services/data_types';
+
 import img from 'next/image';
+import { DetailMovieTypes } from '../../../services/data_types';
 
 interface SectionHeaderProps {
     movie: DetailMovieTypes;

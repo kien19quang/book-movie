@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
-import img from 'next/image';
-import { getDetailMovie } from '@/services/data_api';
+import { getDetailMovie } from '../../../services/data_api';
 
 interface DiscoverItemProps {
   id: number;

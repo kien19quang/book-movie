@@ -1,11 +1,11 @@
-import MovieItem from '@/components/Molecules/MovieItem';
-import Footer from '@/components/Organisms/Footer';
-import Navbar from '@/components/Organisms/Navbar';
-import { getCategories, getCategoryMovies } from '@/services/data_api';
-import { CategoryTypes, DetailMovieTypes } from '@/services/data_types';
 import { useRouter } from 'next/dist/client/router';
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
+import MovieItem from '../../components/molecules/MovieItem';
+import Navbar from '../../components/organisms/Navbar';
+import { getCategories, getCategoryMovies } from '../../services/data_api';
+import { DetailMovieTypes, CategoryTypes } from '../../services/data_types';
+import Footer from '../../components/organisms/Footer';
 
 interface CategoryProps {
   movies: DetailMovieTypes[];

@@ -4,8 +4,8 @@ import Link from "next/link";
 import { FacebookCircleIcon, GoogleIcon } from "../Icons";
 import { signIn } from "next-auth/react";
 import { useCallback, useState } from "react";
-import { ILoginDto } from "@/types/auth";
 import { useRouter } from "next/router";
+import { ILoginDto } from "../../types/auth";
 
 const { Text, Title } = Typography
 

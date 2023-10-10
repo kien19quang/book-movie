@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { getMovies } from '@/services/data_api';
-import MovieItem from '@/components/Molecules/MovieItem';
-import { DetailMovieTypes } from '@/services/data_types';
+import { getMovies } from '../../../services/data_api';
+import { DetailMovieTypes } from '../../../services/data_types';
+import MovieItem from '../../molecules/MovieItem';
 
 export default function Movies() {
   const [query, setQuery] = useState('popular');

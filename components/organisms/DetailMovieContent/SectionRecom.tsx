@@ -1,5 +1,5 @@
-import MovieItem from "@/components/Molecules/MovieItem";
-import { DetailMovieTypes } from "@/services/data_types";
+import { DetailMovieTypes } from "../../../services/data_types";
+import MovieItem from "../../molecules/MovieItem";
 
 
 interface SectionRecomProps {

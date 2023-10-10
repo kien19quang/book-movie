@@ -1,6 +1,7 @@
-import prismadbClient from "@/libs/prismadb";
+
 import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from 'bcrypt';
+import prismadbClient from "../../../libs/prismadb";
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

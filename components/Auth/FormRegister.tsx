@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import { GoogleIcon } from '../Icons';
 import Link from 'next/link';
 import { useCallback, useState } from 'react';
-import { IRegisterDto } from '@/types/auth';
 import { signIn } from 'next-auth/react';
 import axios from 'axios';
+import { IRegisterDto } from '../../types/auth';
 
 const { Text, Title } = Typography
 

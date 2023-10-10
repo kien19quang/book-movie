@@ -4,7 +4,7 @@ import { Provider } from "next-auth/providers/index"
 import Credentials from 'next-auth/providers/credentials';
 import { compare } from "bcrypt";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import prismadbClient from "@/libs/prismadb";
+import prismadbClient from "../../../libs/prismadb";
 
 
 const providers: Provider[] = [

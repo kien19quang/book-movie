@@ -1,11 +1,11 @@
-import Navbar from '@/components/Organisms/Navbar';
-import DiscoverMovies from '@/components/Organisms/DiscoverMovies';
-import CategoryMovies from '@/components/Organisms/CategoryMovies';
-import TrendingMovies from '@/components/Organisms/TrendingMovies';
-import Movies from '@/components/Organisms/Movies';
-import Footer from '@/components/Organisms/Footer';
 import { NextPageContext } from 'next/types';
 import { getSession } from 'next-auth/react';
+import CategoryMovies from '../components/organisms/CategoryMovies';
+import DiscoverMovies from '../components/organisms/DiscoverMovies';
+import Movies from '../components/organisms/Movies';
+import Navbar from '../components/organisms/Navbar';
+import TrendingMovies from '../components/organisms/TrendingMovies';
+import Footer from '../components/organisms/Footer';
 
 export default function Home() {
 
