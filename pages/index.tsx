@@ -1,25 +1,14 @@
-import { useEffect } from 'react';
-import LoadingPage from '../components/atoms/LoadingPage.tsx';
-import CategoryMovies from '../components/organisms/CategoryMovies';
-import DiscoverMovies from '../components/organisms/DiscoverMovies';
-import Footer from '../components/organisms/Footer';
-import Movies from '../components/organisms/Movies';
-import Navbar from '../components/organisms/Navbar';
-import TrendingMovies from '../components/organisms/TrendingMovies';
+import Navbar from '@/components/Organisms/Navbar';
+import DiscoverMovies from '@/components/Organisms/DiscoverMovies';
+import CategoryMovies from '@/components/Organisms/CategoryMovies';
+import TrendingMovies from '@/components/Organisms/TrendingMovies';
+import Movies from '@/components/Organisms/Movies';
+import Footer from '@/components/Organisms/Footer';
 
 export default function Home() {
-  useEffect(() => {
-    setTimeout(() => {
-      const preLoader = document.querySelector<HTMLElement>('.preloader')!;
-      preLoader.style.display = 'none';
-    }, 1500);
-  }, []);
 
   return (
     <>
-      <div className="preloader">
-        <LoadingPage />
-      </div>
       <Navbar />
       <DiscoverMovies />
       <CategoryMovies />

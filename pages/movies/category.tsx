@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { getCategories, getCategoryMovies } from '../../services/data_api';
 import { CategoryTypes, DetailMovieTypes } from '../../services/data_types';
-import MovieItem from '../../components/molecules/MovieItem';
-import Footer from '../../components/organisms/Footer';
-import Navbar from '../../components/organisms/Navbar';
+import MovieItem from '../../components/Molecules/MovieItem';
+import Footer from '../../components/Organisms/Footer';
+import Navbar from '../../components/Organisms/Navbar';
 
 interface CategoryProps {
   movies: DetailMovieTypes[];
