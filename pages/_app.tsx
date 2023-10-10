@@ -1,4 +1,5 @@
-import '@/styles/globals.css';
+import '@/styles/globals.scss';
+import '@/styles/antdConfig.scss';
 import '@/styles/navbar.css';
 import '@/styles/footer.css';
 import '@/styles/discover.css';
@@ -9,12 +10,13 @@ import '@/styles/detail_movie.css';
 import '@/styles/movie_item.css';
 import NextHead from '@/components/Common/NextHead/NextHead';
 import { useStore } from 'react-redux';
-import { SessionProvider } from 'next-auth/react'
+import { SessionProvider, getSession } from 'next-auth/react'
 import { AppPropsWithLayout } from '@/types/common';
 import NextNProgress from 'nextjs-progressbar';
 import { PersistGate } from 'redux-persist/integration/react';
 import { wrapper } from '@/redux/store';
 import Theme from '@/styles/theme';
+import { NextPageContext } from 'next/types';
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppPropsWithLayout) {
   const store: any = useStore();
@@ -28,8 +30,8 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppPropsWithLa
           <Component {...pageProps} />
         </SessionProvider>
       </PersistGate>
-      <Component {...pageProps} />
     </>
   );
 }
+
 export default wrapper.withRedux(App);

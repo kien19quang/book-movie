@@ -29,7 +29,7 @@ export default function DetailMovie(props: DetailMovieProps) {
       </div>
       <div className="detail-movie mb-5">
         <div className="section-backdrop">
-          <img style={{ width: '100%', height: '100%' }} src={`${rootImg}/w1280/${movie?.backdrop_path}`} alt={`backdrop ${movie?.title}`} />
+          <img src={`${rootImg}/w1280/${movie?.backdrop_path}`} alt={`backdrop ${movie?.title}`} />
         </div>
         <div className="section-content">
           <SectionHeader movie={movie} />

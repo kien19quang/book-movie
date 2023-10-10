@@ -18,7 +18,7 @@ export default function SectionHeader(props: SectionHeaderProps) {
 
   return (
     <div className="section-header d-flex flex-row">
-      <img style={{ width: '100%', height: '100%' }} src={`${rootImg}/w185/${movie.poster_path}`} alt={`poster ${movie.title}`} />
+      <img src={`${rootImg}/w185/${movie.poster_path}`} alt={`poster ${movie.title}`} />
       <div className="section-title">
         <div>
           <h1 className="fw-bold">{movie.title}</h1>

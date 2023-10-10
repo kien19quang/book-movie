@@ -1,3 +1,4 @@
+
 import MovieItem from '@/components/Molecules/MovieItem';
 import { getCategories, getCategoryMovies } from '@/services/data_api';
 import { CategoryTypes, DetailMovieTypes } from '@/services/data_types';
