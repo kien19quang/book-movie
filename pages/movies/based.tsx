@@ -1,4 +1,4 @@
-import MovieItem from '@/components/Molecules/MovieItem/MovieItem';
+import MovieItem from '@/components/Molecules/MovieItem';
 import Footer from '@/components/Organisms/Footer';
 import Navbar from '@/components/Organisms/Navbar';
 import { getMovies } from '@/services/data_api';

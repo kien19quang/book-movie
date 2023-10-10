@@ -1,4 +1,4 @@
-import MovieItem from "@/components/Molecules/MovieItem/MovieItem";
+import MovieItem from "@/components/Molecules/MovieItem";
 import { DetailMovieTypes } from "@/services/data_types";
 
 
