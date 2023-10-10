@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { CategoryTypes } from '../../../services/data_types';
+import Image from 'next/image';
 
 interface MovieItemProps {
   id: number;
@@ -31,7 +32,7 @@ export default function MovieItem(props: Partial<MovieItemProps>) {
         <Link href={`/movie/${id}`} legacyBehavior>
           <a>
             <div className="movie-poster mb-3">
-              <img src={`${rootImg}/w500${backdrop}`} alt={`backdrop ${title}`} />
+              <Image src={`${rootImg}/w500${backdrop}`} alt={`backdrop ${title}`} />
             </div>
             <div className="movie-info d-flex flex-row justify-content-between">
               <div>
@@ -54,7 +55,7 @@ export default function MovieItem(props: Partial<MovieItemProps>) {
       <Link href={`/movie/${id}`} legacyBehavior>
         <a className="d-flex flex-column">
           <div className="movie-poster mb-3">
-            <img src={`${rootImg}/w185${poster}`} alt={`poster ${title}`} />
+            <Image src={`${rootImg}/w185${poster}`} alt={`poster ${title}`} />
           </div>
           <div className="movie-info d-flex flex-row justify-content-between">
             <div>

@@ -1,5 +1,6 @@
 import CurrencyFormat from 'react-currency-format';
 import { CreditsTypes, CrewCastTypes, DetailMovieTypes } from '../../../services/data_types';
+import Image from 'next/image';
 
 interface SectionInfoProps {
     movie: DetailMovieTypes;
@@ -67,7 +68,7 @@ export default function SectionInfo(props: SectionInfoProps) {
               if (person.profile_path !== null) {
                 return (
                   <div key={person.credit_id} className="cast-box">
-                    <img src={`${rootImg}/w92${person.profile_path}`} alt={person.name} className="img-cast" />
+                    <Image src={`${rootImg}/w92${person.profile_path}`} alt={person.name} className="img-cast" />
                     <p>{person.original_name}</p>
                   </div>
                 );

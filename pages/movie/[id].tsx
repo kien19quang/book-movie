@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import SectionHeader from '../../components/organisms/DetailMovieContent/SectionHeader';
 import SectionInfo from '../../components/organisms/DetailMovieContent/SectionInfo';
 import SectionRecom from '../../components/organisms/DetailMovieContent/SectionRecom';
@@ -31,7 +32,7 @@ export default function DetailMovie(props: DetailMovieProps) {
       </div>
       <div className="detail-movie mb-5">
         <div className="section-backdrop">
-          <img src={`${rootImg}/w1280/${movie?.backdrop_path}`} alt={`backdrop ${movie?.title}`} />
+          <Image src={`${rootImg}/w1280/${movie?.backdrop_path}`} alt={`backdrop ${movie?.title}`} />
         </div>
         <div className="section-content">
           <SectionHeader movie={movie} />

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
 import { getDetailMovie } from '../../../services/data_api';
+import Image from 'next/image';
 
 interface DiscoverItemProps {
   id: number;
@@ -39,7 +40,7 @@ export default function DiscoverItem(props: DiscoverItemProps) {
       <Link href={`/movie/${id}`} legacyBehavior>
         <a>
           <div className="movie-poster mb-3">
-            <img src={`${rootImg}/w500/${data.backdrop_path}`} alt={`backdrop ${data.title}`} />
+            <Image src={`${rootImg}/w500/${data.backdrop_path}`} alt={`backdrop ${data.title}`} />
           </div>
           <div className="movie-info d-flex flex-row justify-content-between">
             <div>
