@@ -1,14 +1,11 @@
-import img from 'next/image';
-import SectionHeader from '../../components/Organisms/DetailMovieContent/SectionHeader';
-import SectionInfo from '../../components/Organisms/DetailMovieContent/SectionInfo';
-import SectionRecom from '../../components/Organisms/DetailMovieContent/SectionRecom';
-import VideoTrailer from '../../components/Organisms/DetailMovieContent/VideoTrailer';
-import Footer from '../../components/Organisms/Footer';
-import Navbar from '../../components/Organisms/Navbar';
-import {
-  getCredits, getDetailMovie, getSimilarMovies, getVideoTrailer,
-} from '../../services/data_api';
-import { DetailMovieTypes } from '../../services/data_types';
+import Footer from '@/components/Organisms/Footer';
+import SectionHeader from '@/components/Organisms/DetailMovieContent/SectionHeader';
+import SectionInfo from '@/components/Organisms/DetailMovieContent/SectionInfo';
+import SectionRecom from '@/components/Organisms/DetailMovieContent/SectionRecom';
+import VideoTrailer from '@/components/Organisms/DetailMovieContent/VideoTrailer';
+import Navbar from '@/components/Organisms/Navbar';
+import { getDetailMovie, getVideoTrailer, getSimilarMovies, getCredits } from '@/services/data_api';
+import { DetailMovieTypes } from '@/services/data_types';
 
 interface DetailMovieProps {
   movie: DetailMovieTypes;

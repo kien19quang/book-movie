@@ -1,13 +1,13 @@
-import '../styles/globals.css';
-import '../styles/navbar.css';
-import '../styles/footer.css';
-import '../styles/discover.css';
-import '../styles/category.css';
-import '../styles/movies.css';
-import '../styles/trending.css';
-import '../styles/detail_movie.css';
-import '../styles/movie_item.css';
-import '../styles/not_found.css';
+import '@/styles/globals.css';
+import '@styles/navbar.css';
+import '@styles/footer.css';
+import '@/styles/discover.css';
+import '@/styles/category.css';
+import '@/styles/movies.css';
+import '@/styles/trending.css';
+import '@/styles/detail_movie.css';
+import '@/styles/movie_item.css';
+import '@/styles/not_found.css';
 import NextHead from '@/components/Common/NextHead/NextHead';
 import { useStore } from 'react-redux';
 import { SessionProvider } from 'next-auth/react'

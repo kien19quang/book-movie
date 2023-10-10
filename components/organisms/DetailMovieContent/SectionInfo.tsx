@@ -1,6 +1,6 @@
 import CurrencyFormat from 'react-currency-format';
-import { CreditsTypes, CrewCastTypes, DetailMovieTypes } from '../../../services/data_types';
 import img from 'next/image';
+import { DetailMovieTypes, CreditsTypes, CrewCastTypes } from '@/services/data_types';
 
 interface SectionInfoProps {
     movie: DetailMovieTypes;

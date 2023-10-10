@@ -1,8 +1,8 @@
+import MovieItem from '@/components/Molecules/MovieItem';
+import { getCategories, getCategoryMovies } from '@/services/data_api';
+import { CategoryTypes, DetailMovieTypes } from '@/services/data_types';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
-import { getCategories, getCategoryMovies } from '../../../services/data_api';
-import { CategoryTypes, DetailMovieTypes } from '../../../services/data_types';
-import MovieItem from '../../Molecules/MovieItem';
 
 export default function CategoryMovies() {
   const [active, setActive] = useState('Action');
