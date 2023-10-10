@@ -5,6 +5,10 @@ const axiosConfig = axios.create({
     "Content-Type": "application/json"
   },
   baseURL: 'https://api.themoviedb.org/3',
+  params: { 
+    api_key: process.env.NEXT_PUBLIC_API_KEY || '183afbe1b192cfa0271b515c8f977b96',
+    language: process.env.NEXT_LANGUAGE || 'vi-VN'
+  }
 })
 
 // axiosConfig.interceptors.request.use(
