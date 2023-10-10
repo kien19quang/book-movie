@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import type { AppProps } from 'next/app';
 import '../styles/globals.css';
 import '../styles/navbar.css';
