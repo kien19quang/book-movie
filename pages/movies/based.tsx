@@ -14,7 +14,7 @@ interface BasedProps {
   q: string;
 }
 
-export default function based(props: BasedProps) {
+export default function Based(props: BasedProps) {
   const {
     movies, totalPages, q, p,
   } = props;
@@ -28,7 +28,7 @@ export default function based(props: BasedProps) {
       setPageActive(totalPages);
     }
     router.push(`/movies/based?q=${query}&page=${pageActive}`);
-  }, [query, pageActive, totalPages]);
+  }, [query, pageActive, totalPages, router]);
 
   return (
     <>

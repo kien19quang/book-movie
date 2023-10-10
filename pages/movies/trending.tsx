@@ -14,7 +14,7 @@ interface TrendingProps {
   q: string;
 }
 
-export default function trending(props: TrendingProps) {
+export default function Trending(props: TrendingProps) {
   const {
     movies, totalPages, q, p,
   } = props;

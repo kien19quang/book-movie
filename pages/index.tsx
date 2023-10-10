@@ -7,7 +7,7 @@ import Movies from '../components/organisms/Movies';
 import Navbar from '../components/organisms/Navbar';
 import TrendingMovies from '../components/organisms/TrendingMovies';
 
-export default function index() {
+export default function Home() {
   useEffect(() => {
     setTimeout(() => {
       const preLoader = document.querySelector<HTMLElement>('.preloader')!;
