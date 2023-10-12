@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const user = await prismadb.user.create({
+    const user = await prismadbClient.user.create({
       data: {
         email,
         name,
