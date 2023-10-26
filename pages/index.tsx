@@ -1,11 +1,11 @@
 import { NextPageContext } from 'next/types';
 import { getSession } from 'next-auth/react';
-import CategoryMovies from '../components/organisms/CategoryMovies';
-import DiscoverMovies from '../components/organisms/DiscoverMovies';
-import Movies from '../components/organisms/Movies';
-import Navbar from '../components/organisms/Navbar';
-import TrendingMovies from '../components/organisms/TrendingMovies';
-import Footer from '../components/organisms/Footer';
+import CategoryMovies from '../components/Organisms/CategoryMovies';
+import DiscoverMovies from '../components/Organisms/DiscoverMovies';
+import Movies from '../components/Organisms/Movies';
+import Navbar from '../components/Organisms/Navbar';
+import TrendingMovies from '../components/Organisms/TrendingMovies';
+import Footer from '../components/Organisms/Footer';
 
 export default function Home() {
 
@@ -23,7 +23,6 @@ export default function Home() {
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
-  console.log("check", context)
 
   if (!session) {
     return {

@@ -1,9 +1,9 @@
-import SectionHeader from "../../components/organisms/DetailMovieContent/SectionHeader";
-import SectionInfo from "../../components/organisms/DetailMovieContent/SectionInfo";
-import SectionRecom from "../../components/organisms/DetailMovieContent/SectionRecom";
-import VideoTrailer from "../../components/organisms/DetailMovieContent/VideoTrailer";
-import Footer from "../../components/organisms/Footer";
-import Navbar from "../../components/organisms/Navbar";
+import SectionHeader from "../../components/Organisms/DetailMovieContent/SectionHeader";
+import SectionInfo from "../../components/Organisms/DetailMovieContent/SectionInfo";
+import SectionRecom from "../../components/Organisms/DetailMovieContent/SectionRecom";
+import VideoTrailer from "../../components/Organisms/DetailMovieContent/VideoTrailer";
+import Footer from "../../components/Organisms/Footer";
+import Navbar from "../../components/Organisms/Navbar";
 import { getDetailMovie, getVideoTrailer, getSimilarMovies, getCredits } from "../../services/data_api";
 import { DetailMovieTypes } from "../../services/data_types";
 

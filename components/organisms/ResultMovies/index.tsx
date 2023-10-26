@@ -1,6 +1,6 @@
 
 import { DetailMovieTypes } from '../../../services/data_types';
-import MovieItem from '../../molecules/MovieItem';
+import MovieItem from '../../Molecules/MovieItem';
 import MovieNotFound from './MovieNotFound';
 
 interface PopularMoviesProps {

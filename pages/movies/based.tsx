@@ -3,10 +3,10 @@ import { useRouter } from 'next/dist/client/router';
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { DetailMovieTypes } from '../../services/data_types';
-import MovieItem from '../../components/molecules/MovieItem';
-import Navbar from '../../components/organisms/Navbar';
+import MovieItem from '../../components/Molecules/MovieItem';
+import Navbar from '../../components/Organisms/Navbar';
 import { getMovies } from '../../services/data_api';
-import Footer from '../../components/organisms/Footer';
+import Footer from '../../components/Organisms/Footer';
 
 interface BasedProps {
   movies: DetailMovieTypes[];

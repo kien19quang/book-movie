@@ -13,13 +13,13 @@ export default function Theme(children: JSX.Element) {
   return (
     <ConfigProvider
       theme={{
-        token: { colorPrimary: '#27A376', colorText: '#101828', fontSizeHeading1: 24, fontSizeHeading2: 20, borderRadius: 8, fontFamily: roboto.style.fontFamily },
+        token: { colorPrimary: '#6f57eb', colorText: '#101828', fontSizeHeading1: 24, fontSizeHeading2: 20, borderRadius: 8, fontFamily: roboto.style.fontFamily },
         components: {
           Menu: {
             borderRadius: 8,
             itemMarginInline: 16,
-            itemHoverBg: '#d5e3dc',
-            itemHoverColor: '#27A376',
+            itemHoverBg: '#f5f0ff',
+            itemHoverColor: '#6f57eb',
           },
           Input: {
             controlHeight: 36,
@@ -27,6 +27,8 @@ export default function Theme(children: JSX.Element) {
           },
           Button: {
             controlHeight: 36,
+            colorLink: '#6f57eb',
+            colorLinkHover: '#6f57ebcc'
           },
           Tooltip: {
             colorBgSpotlight: '#545454eb'

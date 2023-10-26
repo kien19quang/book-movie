@@ -5,6 +5,7 @@ interface VideoTrailerProps {
 }
 export default function VideoTrailer(props: VideoTrailerProps) {
   const { trailer } = props;
+  console.log(trailer)
 
   const onClick = () => {
     document.querySelector('.overlay')?.classList.remove('active');

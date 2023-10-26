@@ -8,3 +8,8 @@ export interface IRegisterDto {
   email: string,
   password: string
 }
+
+export interface IProfileUser {
+  name: string,
+  email: string,
+}

@@ -13,7 +13,7 @@ export async function getDetailMovie(idm: number) {
 }
 
 export async function getVideoTrailer(idm:number) {
-  const response = await ApiClient.GET(`/movie/${idm}/videos`);
+  const response = await ApiClient.GET(`/movie/${idm}/videos`, { language: 'en-US' });
   return response;
 }
 

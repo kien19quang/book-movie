@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getTrendingMovies } from '../../../services/data_api';
 import { DetailMovieTypes } from '../../../services/data_types';
-import MovieItem from '../../molecules/MovieItem';
+import MovieItem from '../../Molecules/MovieItem';
 
 export default function TrendingMovies() {
   const [active, setActive] = useState('week');

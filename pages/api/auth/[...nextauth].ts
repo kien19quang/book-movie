@@ -15,6 +15,10 @@ const providers: Provider[] = [
       params: {
         scope: 'public_profile read_insights',
       }
+    },
+    profile: (profile, token) => {
+      console.log('check', profile, token)
+      return profile
     }
   }),
   Credentials({
@@ -57,18 +61,33 @@ const providers: Provider[] = [
 export const authOptions: NextAuthOptions = {
   providers,
   callbacks: {
-    jwt: async({token, user, account}) => {
-      console.log("account", account)
+    jwt: async({token, user, account, trigger, session}) => {
       if (account) {
-        console.log(user)
         token.access_token = account.access_token
         token.refresh_token = account.refresh_token;
       }
+      if (trigger === 'update' && session) {
+        if (session.name) {
+          token.name = session.name
+        }
+        if (session.email) {
+          token.email = session.email
+        }
+      }
       return token;
     },
-    session: async({session, token}) => {
-      console.log("session: ", token);
-      (session as any).access_token = token.access_token;
+    session: async({session, token, trigger, newSession}) => {
+      session.access_token = token.access_token
+      session.user.id = token.sub;
+      if (trigger === 'update' && newSession) {
+        console.log(newSession)
+        if (newSession.name) {
+          session.user.name = newSession.name
+        }
+        if (newSession.email) {
+          session.user.email = newSession.email
+        }
+      }
       return session;
     },
   },
