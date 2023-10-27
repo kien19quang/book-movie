@@ -2,10 +2,10 @@ import { useRouter } from 'next/dist/client/router';
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import MovieItem from '../../components/Common/MovieItem';
-import Navbar from '../../components/Organisms/Navbar';
+import Navbar from '../../components/MovieComponent/Navbar';
 import { getCategories, getCategoryMovies } from '../../services/data_api';
 import { DetailMovieTypes, CategoryTypes } from '../../services/data_types';
-import Footer from '../../components/Organisms/Footer';
+import Footer from '../../components/MovieComponent/Footer';
 
 interface CategoryProps {
   movies: DetailMovieTypes[];

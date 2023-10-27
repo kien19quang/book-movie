@@ -1,6 +1,6 @@
-import Footer from "../../components/Organisms/Footer";
-import Navbar from "../../components/Organisms/Navbar";
-import ResultMovies from "../../components/Organisms/ResultMovies";
+import Footer from "../../components/MovieComponent/Footer";
+import Navbar from "../../components/MovieComponent/Navbar";
+import ResultMovies from "../../components/MovieComponent/ResultMovies";
 import { getResultMovies } from "../../services/data_api";
 import { DetailMovieTypes } from "../../services/data_types";
 

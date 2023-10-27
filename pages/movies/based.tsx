@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { DetailMovieTypes } from '../../services/data_types';
 import MovieItem from '../../components/Common/MovieItem';
-import Navbar from '../../components/Organisms/Navbar';
+import Navbar from '../../components/MovieComponent/Navbar';
 import { getMovies } from '../../services/data_api';
-import Footer from '../../components/Organisms/Footer';
+import Footer from '../../components/MovieComponent/Footer';
 
 interface BasedProps {
   movies: DetailMovieTypes[];
