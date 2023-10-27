@@ -1,4 +1,4 @@
-import DiscoverItem from "../../Molecules/DiscoverItem";
+import DiscoverItem from "../../Common/DiscoverItem";
 
 
 export default function DiscoverMovies() {

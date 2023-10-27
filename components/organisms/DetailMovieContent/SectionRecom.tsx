@@ -1,5 +1,5 @@
 import { DetailMovieTypes } from "../../../services/data_types";
-import MovieItem from "../../Molecules/MovieItem";
+import MovieItem from "../../Common/MovieItem";
 
 
 interface SectionRecomProps {

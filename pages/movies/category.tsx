@@ -1,7 +1,7 @@
 import { useRouter } from 'next/dist/client/router';
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import MovieItem from '../../components/Molecules/MovieItem';
+import MovieItem from '../../components/Common/MovieItem';
 import Navbar from '../../components/Organisms/Navbar';
 import { getCategories, getCategoryMovies } from '../../services/data_api';
 import { DetailMovieTypes, CategoryTypes } from '../../services/data_types';
