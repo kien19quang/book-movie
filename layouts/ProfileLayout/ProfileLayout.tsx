@@ -14,9 +14,9 @@ export interface ProfileProps {
 }
 
 const listMenuItem: MenuProps['items'] = [
-  getItem('Thông tin', 'info', <UserOutlined style={{ fontSize: 16 }} />),
-  getItem('Lịch sử mua hàng', 'purchase-history', <HistoryOutlined style={{ fontSize: 16 }} />),
-  // getItem('Giỏ hàng của bạn', 'cart', <ShoppingCartOutlined style={{ fontSize: 16 }} />),
+  getItem('Thông tin', 'info', <UserOutlined style={{ fontSize: 18 }} />),
+  getItem('Lịch sử mua hàng', 'purchase-history', <HistoryOutlined style={{ fontSize: 18 }} />),
+  getItem('Giỏ hàng của bạn', 'cart', <ShoppingCartOutlined style={{ fontSize: 18 }} />),
 ];
 
 export default function ProfileLayout ({ children }: LayoutProps) {

@@ -8,6 +8,7 @@ import { signOut, useSession } from 'next-auth/react';
 import { GearSix, SignOutIcon, UserIcon } from '../../Icons';
 import { MenuInfo } from 'rc-menu/lib/interface';
 import { useRouter } from 'next/router';
+import { ShoppingCartOutlined } from '@ant-design/icons';
 
 const { confirm } = Modal
  
@@ -20,14 +21,14 @@ const items: MenuProps['items'] = [
     ),
     key: 'profile',
   },
-  // {
-  //   label: (
-  //     <Row align="middle" style={{ gap: 8, fontSize: 15 }}>
-  //       <GearSix width={18} height={18} /> Cài đặt
-  //     </Row>
-  //   ),
-  //   key: 'setting',
-  // },
+  {
+    label: (
+      <Row align="middle" style={{ gap: 8, fontSize: 15 }}>
+        <ShoppingCartOutlined style={{ fontSize: 18 }} /> Giỏ hàng 
+      </Row>
+    ),
+    key: 'cart',
+  },
   {
     type: 'divider',
   },
@@ -58,6 +59,9 @@ export default function Navbar() {
     }
     else if (info.key === 'profile') {
       router.push('/profile/info')
+    }
+    else if (info.key === 'cart') {
+      router.push('/profile/cart')
     }
   };
 

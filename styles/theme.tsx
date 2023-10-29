@@ -1,11 +1,11 @@
 import { ConfigProvider } from 'antd';
-import { IBM_Plex_Sans, Roboto } from 'next/font/google';
+import { IBM_Plex_Sans, Poppins, Roboto } from 'next/font/google';
 import * as React from 'react';
 
-const roboto = Roboto({
+const poppins = Poppins({
   weight: ['400', '500', '700'],
-  style: ['italic', 'normal'],
-  subsets: ['vietnamese'],
+  style: ['italic', 'normal',],
+  subsets: ['devanagari'],
   display: 'swap',
 })
 
@@ -13,7 +13,7 @@ export default function Theme(children: JSX.Element) {
   return (
     <ConfigProvider
       theme={{
-        token: { colorPrimary: '#6f57eb', colorText: '#101828', fontSizeHeading1: 24, fontSizeHeading2: 20, borderRadius: 8, fontFamily: roboto.style.fontFamily },
+        token: { colorPrimary: '#6f57eb', colorText: '#101828', fontSizeHeading1: 24, fontSizeHeading2: 20, borderRadius: 8, fontSize: 16 },
         components: {
           Menu: {
             borderRadius: 8,
