@@ -1,21 +1,67 @@
-import { DatePicker, Form, Modal, ModalProps, Select, message } from 'antd';
-import { MouseEvent, useState } from 'react';
+import { DatePicker, Form, InputNumber, Modal, ModalProps, Select, message } from 'antd';
+import { MouseEvent, useEffect, useState } from 'react';
+import { ICinema, IProvince, IScreening } from '../../types/cinema';
+import CinemaService from '../../services/cinemaService';
+import moment from 'moment';
+import { CreateCinemaTicketDto, ICinemaTicket, StatusCinemaTicket } from '../../types/user';
+import { useSession } from 'next-auth/react';
+import { DetailMovieTypes } from '../../services/data_types';
+import UserService from '../../services/userService';
 
-export interface ModalBuyTiketProps extends ModalProps {}
+export interface ModalBuyTiketProps extends ModalProps {
+  movie: DetailMovieTypes;
+  type?: 'book' | 'reset';
+  onChange?: (value: ICinemaTicket[]) => void;
+}
 
-export default function ModalBuyTiket(props: ModalBuyTiketProps) {
-  const [loading, setLoading] = useState<boolean>(false)
+export default function ModalBuyTiket({ movie, type, onChange = () => {}, ...props }: ModalBuyTiketProps) {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [listProvince, setListProvince] = useState<IProvince[]>([]);
+  const [listCinema, setListCinema] = useState<ICinema[]>([]);
+  const [screening, setScreening] = useState<IScreening>();
+  const { data } = useSession();
+  const user = data?.user;
   const [form] = Form.useForm();
 
+  useEffect(() => {
+    const _getProvince = async () => {
+      const response = await CinemaService.getProvince();
+      if (response) {
+        setListProvince(response);
+      }
+    };
+
+    _getProvince();
+  }, []);
+
   const handleBuyTicket = (e: any) => {
-    setLoading(true)
+    setLoading(true);
     form
       .validateFields()
       .then(async (values: any) => {
-        console.log(values)
-        message.success('Bạn đã đặt vé thành công')
+        console.log(values);
+        const newTicket: CreateCinemaTicketDto = {
+          userId: user?.id as string,
+          movieId: movie.id,
+          title: movie.title,
+          overview: movie.overview,
+          thumbnailUrl: movie.backdrop_path,
+          status: StatusCinemaTicket['active'],
+          voteCount: movie.vote_count,
+          voteAverage: movie.vote_average,
+          quantity: values.quantity,
+          ticketPrice: 150000,
+          provinceId: Number(values.province),
+          cinemaId: values.cinema,
+          dayBookTicket: '30-11-2023',
+          type: values.type,
+          movieScreenTime: values.movieScreenTime,
+        };
+        const response = type ? await UserService.updateCinemaTicket(newTicket, type) : await UserService.addCinemaTicket(newTicket);
+        message.success('Bạn đã đặt vé thành công');
+        onChange(response);
+        (props as any).onCancel();
         form.resetFields();
-        (props as any).onCancel()
       })
       .catch((error) => {
         console.log(error);
@@ -26,34 +72,45 @@ export default function ModalBuyTiket(props: ModalBuyTiketProps) {
         }
       })
       .finally(() => setLoading(false));
-  }
+  };
+
+  const handleChangeProvince = (value: number) => {
+    const province = listProvince.find((item) => item.id === value);
+    if (province) {
+      setListCinema(province.cinema);
+    }
+  };
+
+  const handleFieldsChange = async (changeValues: any) => {
+    if (changeValues.dayBookTicket || changeValues.province || changeValues.cinema) {
+      const value = form.getFieldsValue();
+      if (value.dayBookTicket && value.province && value.cinema) {
+        const screening = await CinemaService.getScreening(value.province, value.cinema, '30-11-2023');
+        if (screening) {
+          setScreening(screening);
+        }
+      }
+    }
+  };
 
   return (
-    <Modal {...props} title="Đặt vé xem phim" width={500} centered onOk={handleBuyTicket} confirmLoading={loading} okText='Đặt vé'>
-      <Form form={form} labelCol={{ span: 8 }} wrapperCol={{ style: { width: '100%' } }} style={{ marginTop: 24 }} initialValues={{ type: 1 }}>
+    <Modal {...props} title="Đặt vé xem phim" width={500} centered onOk={handleBuyTicket} confirmLoading={loading} okText="Đặt vé">
+      <Form form={form} labelCol={{ span: 8 }} wrapperCol={{ style: { width: '100%' } }} style={{ marginTop: 24 }} onValuesChange={handleFieldsChange} initialValues={{ quantity: 1 }}>
         <Form.Item label="Đặt vé vào ngày" name="dayBookTicket" rules={[{ required: true, message: 'Vui lòng chọn ngày!' }]}>
-          <DatePicker placeholder="Chọn ngày" style={{ width: '100%' }} />
+          <DatePicker placeholder="Chọn ngày" style={{ width: '100%' }} format="DD-MM-YYYY" />
         </Form.Item>
 
         <Form.Item label="Tỉnh thành" name="province" rules={[{ required: true, message: 'Vui lòng chọn tỉnh thành!' }]}>
           <Select
             placeholder="Chọn tỉnh"
             style={{ width: '100%' }}
-            options={[
-              { label: 'Hà Nội', value: 29 },
-              { label: 'Quảng Ninh', value: 14 },
-            ]}
-          />
-        </Form.Item>
-
-        <Form.Item label="Chọn kiểu" name="type" rules={[{ required: true, message: 'Vui lòng chọn kiểu!' }]}>
-          <Select
-            placeholder="Chọn kiểu"
-            style={{ width: '100%' }}
-            options={[
-              { label: '2D Phụ Đề Việt', value: 1 },
-              { label: '2D Phụ Đề Anh', value: 2 },
-            ]}
+            options={listProvince.map((item) => {
+              return {
+                value: item.id,
+                label: item.name,
+              };
+            })}
+            onChange={handleChangeProvince}
           />
         </Form.Item>
 
@@ -61,28 +118,25 @@ export default function ModalBuyTiket(props: ModalBuyTiketProps) {
           <Select
             placeholder="Chọn rạp chiếu phim"
             style={{ width: '100%' }}
-            options={[
-              { label: 'CGV Menas Mall (CGV CT Plaza)', value: 1 },
-              { label: 'CGV Aeon Tân Phú', value: 2 },
-              { label: 'CGV Pearl Plaza', value: 3 },
-              { label: 'CGV Satra Củ Chi', value: 4 },
-              { label: 'CGV Giga Mall Thủ Đức', value: 5 },
-            ]}
+            options={listCinema.map((item) => {
+              return {
+                value: item.id,
+                label: item.name,
+              };
+            })}
           />
         </Form.Item>
 
-        <Form.Item label="Xuất chiếu phim" name="movieScreenTime" rules={[{ required: true, message: 'Vui lòng chọn xuất chiếu phim!' }]}>
-          <Select
-            placeholder="Chọn xuất chiếu phim"
-            style={{ width: '100%' }}
-            options={[
-              { label: '17:00 PM', value: 1 },
-              { label: '18:00 PM', value: 2 },
-              { label: '19:00 PM', value: 3 },
-              { label: '20:00 PM', value: 4 },
-              { label: '21:00 PM', value: 5 },
-            ]}
-          />
+        <Form.Item label="Số lượng vé" name="quantity" rules={[{ required: true, message: 'Vui lòng chọn tỉnh thành!' }]}>
+          <InputNumber min={1} style={{ width: '100%' }} />
+        </Form.Item>
+
+        <Form.Item label="Chọn kiểu" name="type" rules={[{ required: true, message: 'Vui lòng chọn kiểu!' }]} shouldUpdate>
+          <Select placeholder="Chọn kiểu" style={{ width: '100%' }} disabled={!screening?.types?.length} options={screening?.types} />
+        </Form.Item>
+
+        <Form.Item label="Suất chiếu phim" name="movieScreenTime" rules={[{ required: true, message: 'Vui lòng chọn xuất chiếu phim!' }]}>
+          <Select placeholder="Chọn suất chiếu phim" style={{ width: '100%' }} disabled={!screening?.movieScreenTimes?.length} options={screening?.movieScreenTimes} />
         </Form.Item>
       </Form>
     </Modal>

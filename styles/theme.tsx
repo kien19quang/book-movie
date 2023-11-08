@@ -23,7 +23,7 @@ export default function Theme(children: JSX.Element) {
           },
           Input: {
             controlHeight: 36,
-            activeShadow: 'none'
+            activeShadow: 'none',
           },
           Button: {
             controlHeight: 36,

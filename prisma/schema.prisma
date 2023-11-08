@@ -11,6 +11,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+type CinemaTiket {
+  id Int
+  title String
+  overview String
+  thumbnailUrl String
+  status String
+  voteCount Int
+  voteAverage Int
+  ticketPrice Float
+  quantity Int
+  provinceId Int?
+  cinemaId String?
+  dayBookTicket String?
+  type String?
+  movieScreenTime String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
 model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
@@ -22,7 +40,7 @@ model User {
   updatedAt DateTime @updatedAt
   sessions Session[]
   accounts Account[]
-  favoriteIds String[] @db.ObjectId
+  cinemaTicket CinemaTiket[]
 }
 
 model Account {
@@ -69,4 +87,30 @@ model Movie {
   thumbnailUrl String
   genre String
   duration String
+}
+
+model Province {
+  id Int @id @map("_id")
+  name String
+  cinema Cinema[]
+}
+
+model Cinema {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  provinceId Int
+  province Province @relation(fields: [provinceId], references: [id], onDelete: Cascade)
+}
+
+type SelectJson {
+  label String
+  value String
+}
+model Screenings {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  provinceId Int
+  cinemaId String
+  dayBookTicket String
+  types SelectJson[]
+  movieScreenTimes SelectJson[]
 }

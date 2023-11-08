@@ -1,48 +1,48 @@
-import axios from "axios";
-
-const axiosConfig = axios.create({
-  headers: {
-    "Content-Type": "application/json"
-  },
-  baseURL: 'https://api.themoviedb.org/3',
-  params: { 
-    api_key: process.env.NEXT_PUBLIC_API_KEY || '183afbe1b192cfa0271b515c8f977b96',
-    language: process.env.NEXT_LANGUAGE || 'vi-VN'
-  }
-})
-
-// axiosConfig.interceptors.request.use(
-//   async (config) => {
-//     const session = await getSession() as any
-//     if (session?.access_token) {
-//       config.headers.Authorization = `Bearer ${session?.access_token}`;
-//     }
-
-//     return config
-//   },
-//   (error) => {
-//     message.error('Lỗi không xác định');
-//     console.log(error);
-
-//     Promise.reject(error)
-//   },
-// )
-
-axiosConfig.interceptors.response.use((response) => {
-  return response;
-});
-
-
+import { message } from "antd";
+import axios, { AxiosInstance } from "axios";
+import { getSession } from "next-auth/react";
 class BaseApi {
+  axiosInstance: AxiosInstance;
+  constructor(baseURL?: string, defaultParams?: any) {
+    this.axiosInstance = axios.create({
+      baseURL: baseURL || process.env.BASE_URL,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      params: defaultParams,
+    });
+
+    this.axiosInstance.interceptors.request.use(
+      async (config) => {
+        const session = await getSession() as any;
+        if (session?.access_token) {
+          config.headers.Authorization = `Bearer ${session?.access_token}`;
+        }
+
+        return config;
+      },
+      (error) => {
+        message.error('Lỗi không xác định');
+        console.log(error);
+
+        return Promise.reject(error);
+      }
+    );
+
+    this.axiosInstance.interceptors.response.use((response) => {
+      return response;
+    });
+  }
+
   async GET<T = any>(url: string, params?: any): Promise<T> {
-    return axiosConfig
+    return this.axiosInstance
       .get(url, { params })
       .then(response => response.data)
       .catch(error => {throw error})
   } 
 
   async POST<T = any>(url: string, data: any): Promise<T> {
-    return axiosConfig
+    return this.axiosInstance
       .post(url, data)
       .then((response) => response.data)
       .catch((error) => {
@@ -51,7 +51,7 @@ class BaseApi {
   }
 
   async PUT<T = any>(url: string, data: any): Promise<T> {
-    return axiosConfig
+    return this.axiosInstance
       .put(url, data)
       .then((response) => response.data)
       .catch((error) => {
@@ -60,7 +60,7 @@ class BaseApi {
   }
 
   async DELETE<T = any>(url: string): Promise<T> {
-    return axiosConfig
+    return this.axiosInstance
       .delete(url)
       .then((response) => response.data)
       .catch((error) => {
@@ -69,7 +69,7 @@ class BaseApi {
   }
 }
 
-export { axiosConfig }
+export { BaseApi }
 const ApiClient = new BaseApi()
 
 export default ApiClient

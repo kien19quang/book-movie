@@ -5,6 +5,9 @@ import { Button, Flex, Typography, message } from 'antd';
 import { DollarOutlined, ShoppingOutlined } from '@ant-design/icons';
 import ModalBuyTiket from '../../ListModal/ModalBuyTicket';
 import { useState } from 'react';
+import { CreateCinemaTicketDto, StatusCinemaTicket } from '../../../types/user';
+import { useSession } from 'next-auth/react';
+import UserService from '../../../services/userService';
 
 const { Text, Title } = Typography
 
@@ -19,11 +22,31 @@ export default function SectionHeader(props: SectionHeaderProps) {
   const rootImg = process.env.NEXT_PUBLIC_IMG;
   const year = new Date(movie.release_date);
   const categories = movie.genres.map((genre: any) => genre.name).splice(0, 2).join(' | ');
+  const { data } = useSession()
+  const user = data?.user 
 
   const onClick = () => {
     const videoTrailer = document.querySelector('.overlay');
     videoTrailer?.classList.add('active');
   };
+
+  const addTicketToCart = async () => {
+    const newTicket: CreateCinemaTicketDto = {
+      userId: user?.id as string,
+      movieId: movie.id,
+      title: movie.title,
+      overview: movie.overview,
+      thumbnailUrl: movie.backdrop_path,
+      status: StatusCinemaTicket['pending'],
+      voteCount: movie.vote_count,
+      voteAverage: movie.vote_average,
+      quantity: 1,
+      ticketPrice: 150000,
+    }
+    const response = await UserService.addCinemaTicket(newTicket)
+    console.log(response)
+    message.success('Thêm vào giỏ hàng để đặt vé thành công')
+  }
 
   return (
     <>
@@ -55,14 +78,14 @@ export default function SectionHeader(props: SectionHeaderProps) {
             </div>
             <Flex style={{ marginTop: 8, gap: 12 }} align='center'>
               <Text>Giá vé: 150.000đ</Text>
-              <Button icon={<ShoppingOutlined />} onClick={() => message.success('Thêm vào giỏ hàng để đặt vé thành công')}>Thêm vào giỏ hàng</Button>
+              <Button icon={<ShoppingOutlined />} onClick={addTicketToCart}>Thêm vào giỏ hàng</Button>
               <Button type='primary' icon={<DollarOutlined />} onClick={() => setOpenModal(true)}>Mua vé</Button>
             </Flex>
   
           </div>
         </div>
       </div>
-      <ModalBuyTiket open={openModal} onCancel={() => setOpenModal(false)} />
+      <ModalBuyTiket open={openModal} onCancel={() => setOpenModal(false)} movie={movie}/>
     </>
   );
 }

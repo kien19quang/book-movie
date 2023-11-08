@@ -47,7 +47,7 @@ export default function DetailMovie(props: DetailMovieProps) {
 
 interface GetStaticProps {
     params: {
-        id: number;
+      id: number;
     }
 }
 
