@@ -5,10 +5,9 @@ import prismadbClient from '../../../libs/prismadb';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     if (req.method === 'GET') {
-      const { provinceId, cinemaId, dayBookTicket } = req.query as any
+      const { cinemaId, dayBookTicket } = req.query as any
       const screening = await prismadbClient.screenings.findFirst({
         where: {
-          provinceId: Number(provinceId),
           cinemaId: cinemaId,
           dayBookTicket: dayBookTicket,
         }
@@ -21,19 +20,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(200).json(screening);
     } else if (req.method === 'POST') {
       const data = req.body as CreateScreening;
-      const screening = await prismadbClient.screenings.findMany({
+      const screening = await prismadbClient.screenings.findFirst({
         where: {
-          provinceId: data.provinceId,
           cinemaId: data.cinemaId,
           dayBookTicket: data.dayBookTicket,
         },
       });
-      if (screening.length > 0) {
+      if (!screening) {
         return res.status(400).json({ error: 'Xuất chiếu đã tồn tại trong hệ thống' });
       }
       const response = await prismadbClient.screenings.create({
         data: {
-          provinceId: data.provinceId,
           cinemaId: data.cinemaId,
           dayBookTicket: data.dayBookTicket,
           types: data.types,

@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method !== 'POST') {
       return res.status(405).end()
     }
-    const { email, name, password } = req.body
+    const { email, name, password, role } = req.body
 
     const existingUser = await prismadbClient.user.findUnique({
       where: {
@@ -30,6 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         hashedPassword,
         image: '',
         emailVerified: new Date(),
+        role: role || 'CUSTOMER'
       }
     })
 

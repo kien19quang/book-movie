@@ -36,6 +36,7 @@ model User {
   email String? @unique
   emailVerified DateTime?
   hashedPassword String?
+  role String @default("CUSTOMER")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   sessions Session[]
@@ -99,7 +100,8 @@ model Cinema {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   provinceId Int
-  province Province @relation(fields: [provinceId], references: [id], onDelete: Cascade)
+  province Province? @relation(fields: [provinceId], references: [id], onDelete: Cascade)
+  screenings Screenings[]
 }
 
 type SelectJson {
@@ -108,9 +110,9 @@ type SelectJson {
 }
 model Screenings {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  provinceId Int
-  cinemaId String
+  cinemaId String @db.ObjectId
   dayBookTicket String
   types SelectJson[]
   movieScreenTimes SelectJson[]
+  cinema Cinema? @relation(fields: [cinemaId], references: [id], onDelete: Cascade)
 }

@@ -3,9 +3,17 @@ export interface CreateProvince {
   name: string;
 }
 
+export interface UpdateProvince extends CreateProvince {
+  oldId: number
+}
+
 export interface CreateCinema {
   name: string;
   provinceId: number
+}
+
+export interface UpdateCinema extends CreateCinema {
+  id: string
 }
 
 export interface IOption {
@@ -14,7 +22,6 @@ export interface IOption {
 }
 
 export interface CreateScreening {
-  provinceId: number
   cinemaId: string
   dayBookTicket: string
   types: IOption[],

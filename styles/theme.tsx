@@ -44,6 +44,9 @@ export default function Theme(children: JSX.Element) {
             paddingXS: 0,
             borderRadiusLG: 8,
           },
+          Select: {
+            controlHeight: 36
+          }
         },
       }}
     >

@@ -6,6 +6,8 @@ import Movies from '../components/MovieComponent/Movies';
 import Navbar from '../components/MovieComponent/Navbar';
 import TrendingMovies from '../components/MovieComponent/TrendingMovies';
 import Footer from '../components/MovieComponent/Footer';
+import serverAuth from '../libs/serverAuth';
+import { isEmpty } from 'lodash';
 
 export default function Home() {
 
@@ -23,11 +25,22 @@ export default function Home() {
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
+  const response = await serverAuth(context.req as any, context.res as any)
 
-  if (!session) {
+  if (!session || !response) {
     return {
       redirect: {
         destination: '/auth/signin',
+        permanent: false,
+      }
+    }
+  }
+  console.log(response)
+
+  if ((response?.currentUser as any).role === 'ADMIN') {
+    return {
+      redirect: {
+        destination: '/admin',
         permanent: false,
       }
     }
