@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { CreateScreening } from '../../../types/cinema';
+import { CreateScreening, UpdateScreening } from '../../../types/cinema';
 import prismadbClient from '../../../libs/prismadb';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
 
       if (!screening) {
-        return res.status(400).json({ error: 'Xuất chiếu không tồn tại' });
+        return res.status(400).json({ error: 'Suất chiếu không tồn tại' });
       }
 
       return res.status(200).json(screening);
@@ -26,8 +26,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           dayBookTicket: data.dayBookTicket,
         },
       });
-      if (!screening) {
-        return res.status(400).json({ error: 'Xuất chiếu đã tồn tại trong hệ thống' });
+      if (screening) {
+        return res.status(400).json({ error: 'Suất chiếu đã tồn tại trong hệ thống' });
       }
       const response = await prismadbClient.screenings.create({
         data: {
@@ -36,6 +36,44 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           types: data.types,
           movieScreenTimes: data.movieScreenTimes
         },
+        include: {
+          cinema: {
+            include: {
+              province: true
+            }
+          }
+        }
+      });
+
+      return res.status(200).json(response);
+    } else if (req.method === 'PUT') {
+      const data = req.body as UpdateScreening;
+      const screening = await prismadbClient.screenings.findFirst({
+        where: {
+          cinemaId: data.cinemaId,
+          dayBookTicket: data.dayBookTicket,
+        },
+      });
+      if (!screening) {
+        return res.status(400).json({ error: 'Suất chiếu không tồn tại trong hệ thống' });
+      }
+      const response = await prismadbClient.screenings.update({
+        where: {
+          id: data.id
+        },
+        data: {
+          cinemaId: data.cinemaId,
+          dayBookTicket: data.dayBookTicket,
+          types: data.types,
+          movieScreenTimes: data.movieScreenTimes
+        },
+        include: {
+          cinema: {
+            include: {
+              province: true
+            }
+          }
+        }
       });
 
       return res.status(200).json(response);

@@ -2,11 +2,11 @@ import { DatePicker, Form, InputNumber, Modal, ModalProps, Select, message } fro
 import { MouseEvent, useEffect, useState } from 'react';
 import { ICinema, IProvince, IScreening } from '../../types/cinema';
 import CinemaService from '../../services/cinemaService';
-import moment from 'moment';
 import { CreateCinemaTicketDto, ICinemaTicket, StatusCinemaTicket } from '../../types/user';
 import { useSession } from 'next-auth/react';
 import { DetailMovieTypes } from '../../services/data_types';
 import UserService from '../../services/userService';
+import dayjs from 'dayjs';
 
 export interface ModalBuyTiketProps extends ModalProps {
   movie: DetailMovieTypes;
@@ -53,7 +53,7 @@ export default function ModalBuyTiket({ movie, type, onChange = () => {}, ...pro
           ticketPrice: 150000,
           provinceId: Number(values.province),
           cinemaId: values.cinema,
-          dayBookTicket: '30-11-2023',
+          dayBookTicket: dayjs(values.dayBookTicket).format('DD-MM-YYYY'),
           type: values.type,
           movieScreenTime: values.movieScreenTime,
         };
@@ -85,7 +85,7 @@ export default function ModalBuyTiket({ movie, type, onChange = () => {}, ...pro
     if (changeValues.dayBookTicket || changeValues.province || changeValues.cinema) {
       const value = form.getFieldsValue();
       if (value.dayBookTicket && value.province && value.cinema) {
-        const screening = await CinemaService.getScreening(value.province, value.cinema, '30-11-2023');
+        const screening = await CinemaService.getScreening(value.province, value.cinema, dayjs(value.dayBookTicket).format('DD-MM-YYYY'));
         if (screening) {
           setScreening(screening);
         }
@@ -132,11 +132,31 @@ export default function ModalBuyTiket({ movie, type, onChange = () => {}, ...pro
         </Form.Item>
 
         <Form.Item label="Chọn kiểu" name="type" rules={[{ required: true, message: 'Vui lòng chọn kiểu!' }]} shouldUpdate>
-          <Select placeholder="Chọn kiểu" style={{ width: '100%' }} disabled={!screening?.types?.length} options={screening?.types} />
+          <Select
+            placeholder="Chọn kiểu"
+            style={{ width: '100%' }}
+            disabled={!screening?.types?.length}
+            options={screening?.types.map((item) => {
+              return {
+                value: item,
+                label: item,
+              };
+            })}
+          />
         </Form.Item>
 
         <Form.Item label="Suất chiếu phim" name="movieScreenTime" rules={[{ required: true, message: 'Vui lòng chọn xuất chiếu phim!' }]}>
-          <Select placeholder="Chọn suất chiếu phim" style={{ width: '100%' }} disabled={!screening?.movieScreenTimes?.length} options={screening?.movieScreenTimes} />
+          <Select
+            placeholder="Chọn suất chiếu phim"
+            style={{ width: '100%' }}
+            disabled={!screening?.movieScreenTimes?.length}
+            options={screening?.movieScreenTimes.map((item) => {
+              return {
+                value: item,
+                label: item,
+              };
+            })}
+          />
         </Form.Item>
       </Form>
     </Modal>

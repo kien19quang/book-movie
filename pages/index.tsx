@@ -26,7 +26,7 @@ export default function Home() {
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
-  const user = await prismadbClient.user.findUnique({
+  const user = session?.user?.id && await prismadbClient.user.findUnique({
     where: {
       id: session?.user.id || ''
     }

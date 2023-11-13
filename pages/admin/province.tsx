@@ -154,8 +154,9 @@ const AdminProvince = (props: InferGetServerSidePropsType<typeof getServerSidePr
             backgroundColor: 'white',
             boxShadow: '0px 6px 9px 0px rgba(156, 156, 156, 0.10), 0px 3px 2px 0px rgba(156, 156, 156, 0.08)',
             gap: 24,
-            maxWidth: 1000,
+            maxWidth: 1200,
             width: '100%',
+            margin: '0 40px'
           }}
         >
           <Flex justify="space-between" align="center">

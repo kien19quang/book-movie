@@ -46,6 +46,9 @@ export default function Theme(children: JSX.Element) {
           },
           Select: {
             controlHeight: 36
+          },
+          DatePicker: {
+            controlHeight: 36
           }
         },
       }}

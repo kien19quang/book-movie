@@ -112,7 +112,7 @@ model Screenings {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   cinemaId String @db.ObjectId
   dayBookTicket String
-  types SelectJson[]
-  movieScreenTimes SelectJson[]
+  types String[]
+  movieScreenTimes String[]
   cinema Cinema? @relation(fields: [cinemaId], references: [id], onDelete: Cascade)
 }

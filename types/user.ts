@@ -18,6 +18,12 @@ export interface CreateCinemaTicketDto {
   movieScreenTime?: string
 }
 
+export interface ITicketPurchase {
+  userId: string;
+  movieId: number;
+  status: StatusCinemaTicket
+}
+
 export enum StatusCinemaTicket {
   pending = 'pending',
   active = 'active',

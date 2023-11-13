@@ -18,7 +18,7 @@ const listMenuItem: MenuProps['items'] = [
   getItem('Tỉnh thành', 'province', <EnvironmentOutlined style={{ fontSize: 18 }} />),
   getItem('Rạp chiếu phim', 'cinema', <VideoCameraOutlined style={{ fontSize: 18 }} />),
   getItem('Suất chiếu', 'screening', <CalendarOutlined style={{ fontSize: 18 }} />),
-  getItem('Vé đã bản', 'ticket', <DollarOutlined style={{ fontSize: 18 }} />),
+  getItem('Vé đã bán', 'ticket', <DollarOutlined style={{ fontSize: 18 }} />),
 ];
 
 export default function AdminLayout({ children }: LayoutProps) {

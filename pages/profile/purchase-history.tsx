@@ -1,7 +1,7 @@
 import { Flex, Typography, Table } from 'antd';
 import ProfileLayout from '../../layouts/ProfileLayout/ProfileLayout';
 import { ColumnsType } from 'antd/es/table';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const { Text, Title } = Typography;
 
@@ -46,7 +46,7 @@ for (let i = 0; i < 20; i++) {
     id: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     nameMovie: 'Quỷ Ám: Tín Đồ',
     quantity: 1,
-    createdAt: moment().format('DD-MM-YYYY'),
+    createdAt: dayjs().format('DD-MM-YYYY'),
   });
 }
 

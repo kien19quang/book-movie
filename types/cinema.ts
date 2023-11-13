@@ -24,8 +24,12 @@ export interface IOption {
 export interface CreateScreening {
   cinemaId: string
   dayBookTicket: string
-  types: IOption[],
-  movieScreenTimes: IOption[]
+  types: string[],
+  movieScreenTimes: string[]
+}
+
+export interface UpdateScreening extends CreateScreening {
+  id: string
 }
 
 export interface ICinema {
@@ -46,6 +50,6 @@ export interface IScreening {
   provinceId: number
   cinemaId: string
   dayBookTicket: string
-  types: IOption[],
-  movieScreenTimes: IOption[]
+  types: string[],
+  movieScreenTimes: string[]
 }

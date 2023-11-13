@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { CreateCinemaTicketDto, StatusCinemaTicket } from "../../../types/user";
-import prismadbClient from "../../../libs/prismadb";
+import { CreateCinemaTicketDto, StatusCinemaTicket } from "../../../../types/user";
+import prismadbClient from "../../../../libs/prismadb";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
