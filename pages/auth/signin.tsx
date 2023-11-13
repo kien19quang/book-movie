@@ -1,15 +1,10 @@
-import { Button, Checkbox, Divider, Form, Input, Row, Typography, message } from "antd";
-import { getSession, signIn } from "next-auth/react";
+import { Row, Typography } from "antd";
+import { getSession } from "next-auth/react";
 import { NextPageContext } from "next/types";
-import { useRouter } from "next/router";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import Link from "next/link";
-import { useCallback, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import FormLogin from "../../components/Auth/FormLogin";
 import FormRegister from "../../components/Auth/FormRegister";
-import PosterLogin from '../../public/image/hero.jpg'
-import serverAuth from "../../libs/serverAuth";
+import PosterLogin from '../../public/image/hero.jpg';
 
 export interface SigninProps {
 }

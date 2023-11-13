@@ -8,6 +8,7 @@ import TrendingMovies from '../components/MovieComponent/TrendingMovies';
 import Footer from '../components/MovieComponent/Footer';
 import serverAuth from '../libs/serverAuth';
 import { isEmpty } from 'lodash';
+import prismadbClient from '../libs/prismadb';
 
 export default function Home() {
 
@@ -25,9 +26,13 @@ export default function Home() {
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
-  const response = await serverAuth(context.req as any, context.res as any)
+  const user = await prismadbClient.user.findUnique({
+    where: {
+      id: session?.user.id || ''
+    }
+  })
 
-  if (!session || !response) {
+  if (!session || !user) {
     return {
       redirect: {
         destination: '/auth/signin',
@@ -35,9 +40,9 @@ export async function getServerSideProps(context: NextPageContext) {
       }
     }
   }
-  console.log(response)
+  console.log(user)
 
-  if ((response?.currentUser as any).role === 'ADMIN') {
+  if (user.role === 'ADMIN') {
     return {
       redirect: {
         destination: '/admin',
