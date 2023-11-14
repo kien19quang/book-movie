@@ -87,7 +87,7 @@ export default function FormRegister({ onChangeForm }: FormRegisterProps) {
               <Input placeholder="example@gmail.com" prefix={<MailOutlined />} />
             </Form.Item>
 
-            <Form.Item name="password" label="Password" rules={[{ required: true, message: 'Vui lòng điền mật khẩu' }]}>
+            <Form.Item name="password" label="Password" rules={[{ required: true, message: 'Vui lòng điền mật khẩu' }, { min: 6, message: 'Mật khẩu cần ít nhất 6 ký tự' }]}>
               <Input.Password placeholder="Password" prefix={<LockOutlined />} />
             </Form.Item>
 
