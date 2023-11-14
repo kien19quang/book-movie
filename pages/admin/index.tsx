@@ -48,10 +48,11 @@ const AdminUser = (props: InferGetServerSidePropsType<typeof getServerSideProps>
   };
 
   const handleDeleteUser = async (record: DataType) => {
+    console.log(record)
     confirm({
       title: 'Bạn có chắc muốn xoá tài khoản này không?',
       onOk: async () => {
-        const user = await ApiClient.DELETE(`/api/cinema/province?id=${record.id}`);
+        const user = await ApiClient.DELETE(`/api/user?id=${record.id}`);
         if (user) {
           setListUser((prev) => prev.filter((item) => item.id !== record.id));
           message.success('Xoá tài khoản thành công');
@@ -65,11 +66,13 @@ const AdminUser = (props: InferGetServerSidePropsType<typeof getServerSideProps>
     form
       .validateFields()
       .then(async (values: IRegisterDto) => {
-        const newListUser = [...listUser];
+        let newListUser = [...listUser];
         if (!idEditUser) {
           const user = await ApiClient.POST('/api/auth/register', values);
           if (user) {
-            newListUser.push(user);
+            user.createdAt = dayjs(user.createdAt).format('DD-MM-YYYY') as any;
+            user.updatedAt = dayjs(user.updatedAt).format('DD-MM-YYYY') as any;
+            newListUser = [user, ...newListUser];
           }
         } else {
           const user = await ApiClient.PUT('/api/user/', { id: idEditUser, ...values });
@@ -191,6 +194,9 @@ export async function getServerSideProps(context: NextPageContext) {
       createdAt: true,
       updatedAt: true,
     },
+    orderBy: {
+      createdAt: 'desc'
+    }
   });
 
   users.forEach((item) => {

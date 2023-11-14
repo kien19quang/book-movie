@@ -62,28 +62,28 @@ const AdminTicket = (props: InferGetServerSidePropsType<typeof getServerSideProp
     setListCinemaTicket(newListCinemaTicket)
   }
 
-  const handleDoneTicket = (record: DataType) => {
+  const handleDoneTicket = (record: DataType, index: number) => {
     confirm({
       title: 'Người dùng đã mua vé?',
       okText: 'Xác nhận',
       onOk: async () => {
         const cinemaTicket = await ApiClient.PUT('/api/user/cinema-ticket/ticket-purchase', { movieId: record.id, userId: record.userId, status: StatusCinemaTicket['completed'] } as ITicketPurchase)
         if (cinemaTicket) {
-          setListCinemaTicket(prev => prev.filter(item => item.id !== record.id))
+          setListCinemaTicket(prev => prev.filter((item, idx) => index !== idx && item))
           message.success('Bán vé thành công')
         }
       }
     })
   }
 
-  const handleCancelTicket = (record: DataType) => {
+  const handleCancelTicket = (record: DataType, index: number) => {
     confirm({
       title: 'Bạn có muốn huỷ vé của khách hàng?',
       okText: 'Xác nhận',
       onOk: async () => {
         const cinemaTicket = await ApiClient.PUT('/api/user/cinema-ticket/ticket-purchase', { movieId: record.id, userId: record.userId, status: StatusCinemaTicket['canceled'] } as ITicketPurchase)
         if (cinemaTicket) {
-          setListCinemaTicket(prev => prev.filter(item => item.id !== record.id))
+          setListCinemaTicket(prev => prev.filter((item, idx) => index !== idx && item))
           message.success('Huỷ vé thành công')
         }
       }
@@ -165,8 +165,8 @@ const AdminTicket = (props: InferGetServerSidePropsType<typeof getServerSideProp
       render: (_, record, index) => {
         return (
           <Flex gap={16}>
-            <Button icon={<CheckOutlined />} onClick={() => handleDoneTicket(record)} />
-            <Button danger icon={<DeleteOutlined />} onClick={() => handleCancelTicket(record)} />
+            <Button icon={<CheckOutlined />} onClick={() => handleDoneTicket(record, index)} />
+            <Button danger icon={<DeleteOutlined />} onClick={() => handleCancelTicket(record, index)} />
           </Flex>
         );
       },
@@ -214,6 +214,9 @@ export async function getServerSideProps(context: NextPageContext) {
         id: true,
         role: true,
         cinemaTicket: true,
+      },
+      orderBy: {
+        createdAt: 'desc'
       }
     }),
     prismadbClient.province.findMany({
