@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         { value: 22, label: "Tuyên Quang" },
       ]
 
-      return res.status(200).json(result)
+      return res.status(200).json({ data: result })
     }
     else {
       return res.status(405).end()
