@@ -4,9 +4,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     if (req.method === 'GET') {
-      const { date } = req.query
+      const { date } = req.query as any  
+
+      const value = dayjs(Number(date)).format('DD/MM/YYYY')
       
-      const value = dayjs(date as any).format('DD/MM/YYYY')
       let result: any = []
       if (value === '29/11/2023') {
         result = [
