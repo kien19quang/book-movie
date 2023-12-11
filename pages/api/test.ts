@@ -5,20 +5,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     if (req.method === 'GET') {
       const { date } = req.query as any  
-
-      const value = dayjs(Number(date)).format('DD/MM/YYYY')
       
-      let result: any = []
-      if (value === '29/11/2023') {
-        result = [
+      const result = {
+        "15/12/2023": [
           { value: 14, label: "Quảng Ninh" },
           { value: 29, label: "Hà Nội" },
           { value: 36, label: "Thanh Hoá" },
           { value: 88, label: "Vĩnh Phúc" },
-        ]
-      }
-      if (value === '18/11/2023') {
-        result = [
+        ],
+        "18/12/2023": [
           { value: 14, label: "Nam Định" },
           { value: 29, label: "Hồ Chí Minh" },
           { value: 36, label: "Cần Thơ" },
