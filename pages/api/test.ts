@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     if (req.method === 'GET') {
-      const { date } = req.query as any  
+      const { date, isTree } = req.query as any  
       
       const result = {
         "15/12/2023": [
@@ -18,6 +18,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           { value: 29, label: "Hồ Chí Minh" },
           { value: 36, label: "Cần Thơ" },
         ]
+      }
+
+      if (isTree) {
+        const response = [
+          { title: '20/12/2023', value: '20/12/2023', children: [{ value: '19', title: '19h00' }, { value: '20', title: '20h00' }] },
+          { title: '30/12/2023', value: '30/12/2023', children: [{ value: '17', title: '17h00' }, { value: '18', title: '18h00' }] },
+        ]
+        return res.status(200).json({ data: response })
       }
 
       return res.status(200).json({ data: result })
